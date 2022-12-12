@@ -40,5 +40,17 @@ public class EmployeeController {
 
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/deleteEmployee", consumes = "application/json", produces = "application/json")
+    public HashMap<String,String> deleteEmployee(@RequestBody Employee e){
+
+        dao.deleteEmployee(e.getId());
+        HashMap<String, String> map = new HashMap<>();
+        map.put("status", "success");
+
+        return map;
+
+    }
+
 
 }

@@ -1,6 +1,8 @@
 package com.Nest.NestDigitalApp.Dao;
 
 import com.Nest.NestDigitalApp.model.Employee;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -11,4 +13,12 @@ public interface EmployeeDao extends CrudRepository<Employee, Integer> {
 
     @Query(value = "SELECT `id`, `designation`, `email_id`, `emp_id`, `name`, `password`, `salary`, `username` FROM `employee` WHERE `emp_id` = :emp_id", nativeQuery = true)
     List<Employee> searchEmployee(int emp_id);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM `employee` WHERE `id` = :id", nativeQuery = true)
+    void deleteEmployee(int id);
 }
+
+
