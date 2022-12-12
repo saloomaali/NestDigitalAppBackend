@@ -6,6 +6,7 @@ import com.Nest.NestDigitalApp.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.lang.model.util.Elements;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
@@ -70,5 +71,11 @@ public class EmployeeController {
         return map;
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/viewProfileEmp",consumes = "application/json", produces = "application/json")
+    public List<Employee> viewProfile(@RequestBody Employee e){
 
+        return dao.viewProfile(e.getId());
+
+    }
 }
