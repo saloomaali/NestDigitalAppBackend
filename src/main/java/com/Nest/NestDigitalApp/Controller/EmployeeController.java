@@ -6,6 +6,7 @@ import com.Nest.NestDigitalApp.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,6 +51,23 @@ public class EmployeeController {
 
         return map;
 
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/employeeLogin", consumes = "application/json", produces = "application/json")
+    public HashMap<String, String> employeeLogin(@RequestBody Employee e){
+
+        List<Employee> result = dao.employeeLogin(e.getUsername(), e.getPassword());
+        HashMap<String, String> map = new HashMap<>();
+        if (result.size()==0){
+            map.put("status", "failed");
+        }
+        else {
+            map.put("status", "success");
+            int id = result.get(0).getId();
+            map.put("employee_Id", String.valueOf(id));
+        }
+        return map;
     }
 
 
