@@ -2,12 +2,15 @@ package com.Nest.NestDigitalApp.Controller;
 
 
 import com.Nest.NestDigitalApp.Dao.EmployeeDao;
+import com.Nest.NestDigitalApp.Dao.LeaveCounterDao;
 import com.Nest.NestDigitalApp.model.Employee;
+import com.Nest.NestDigitalApp.model.LeaveCounter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.lang.model.util.Elements;
 import java.nio.file.Path;
+import java.time.Year;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,13 +20,37 @@ public class EmployeeController {
     @Autowired
     private EmployeeDao dao;
 
+    @Autowired
+    private LeaveCounterDao daoc;
+
+    int year = Year.now().getValue();
+
+
+
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/addEmployee", consumes = "application/json", produces = "application/json")
     public HashMap<String, String> addEmployee(@RequestBody Employee e){
 
         HashMap<String, String> map = new HashMap<>();
-        map.put("status", "success");
+
+
         dao.save(e);
+
+            LeaveCounter c = new LeaveCounter();
+            c.setEmpId(e.getId());
+            c.setCasualLeave(20);
+            c.setSickLeave(7);
+            c.setSpecialLeave(3);
+            c.setYear(String.valueOf(year));
+            daoc.save(c);
+
+            map.put("EmployeeId",String.valueOf(e.getId()));
+            map.put("status", "success");
+
+
+
+
+
         return map;
 
     }
