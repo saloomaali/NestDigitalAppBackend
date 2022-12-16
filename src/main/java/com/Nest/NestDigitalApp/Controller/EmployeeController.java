@@ -70,6 +70,25 @@ public class EmployeeController {
     }
 
     @CrossOrigin(origins = "*")
+    @PostMapping(path = "/editEmployee", consumes = "application/json", produces = "application/json")
+    public HashMap<String, String> editEmployee(@RequestBody Employee e)
+    {
+        dao.editEmployee(e.getDesignation(),e.getEmail_Id(),e.getEmpId(),e.getName(),e.getSalary(), e.getId());
+        HashMap<String, String> map = new HashMap<>();
+        map.put("status", "success");
+        return map;
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/changePassword", consumes = "application/json", produces = "application/json")
+    public HashMap<String, String> changePassword(@RequestBody Employee e){
+
+        dao.changePassword(e.getPassword(),e.getUsername(),e.getId());
+        HashMap<String, String> map = new HashMap<>();
+        map.put("status", "success");
+        return map;
+    }
+    @CrossOrigin(origins = "*")
     @PostMapping(path = "/deleteEmployee", consumes = "application/json", produces = "application/json")
     public HashMap<String,String> deleteEmployee(@RequestBody Employee e){
 

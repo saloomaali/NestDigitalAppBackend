@@ -53,7 +53,7 @@ public class LeaveCounter {
         this.year = year;
     }
 
-    public int getCasualLeave(int i) {
+    public int getCasualLeave() {
         return casualLeave;
     }
 
@@ -61,7 +61,7 @@ public class LeaveCounter {
         this.casualLeave = casualLeave;
     }
 
-    public int getSickLeave(int i) {
+    public int getSickLeave() {
         return sickLeave;
     }
 
@@ -69,7 +69,7 @@ public class LeaveCounter {
         this.sickLeave = sickLeave;
     }
 
-    public int getSpecialLeave(int i) {
+    public int getSpecialLeave() {
         return specialLeave;
     }
 
