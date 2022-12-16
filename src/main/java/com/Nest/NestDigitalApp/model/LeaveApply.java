@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "LeaveApply")
 public class LeaveApply {
@@ -86,7 +88,7 @@ public class LeaveApply {
         this.toDate = toDate;
     }
 
-    public String getApplyDate() {
+    public String getApplyDate(Date currentDate) {
         return applyDate;
     }
 
